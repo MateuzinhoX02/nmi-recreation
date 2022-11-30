@@ -1,0 +1,32 @@
+{
+	"storyName": "no more innocence",
+	"difficulties": "run",
+	"hideFreeplay": false,
+	"weekBackground": "bg2",
+	"weekBefore": "tutorial",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": false,
+	"songs": [
+		[
+			"nomoreinnocence",
+			"nmi",
+			[
+				0,
+				0,
+				0
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"hiddenUntilUnlocked": false,
+	"weekName": "Custom Week"
+}

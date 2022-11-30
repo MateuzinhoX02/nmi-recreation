@@ -1,0 +1,9 @@
+Vertal Heth bar :)
+
+value1 = number | where it should be
+0 = "left" | 1 = "center" | 2 = "right"
+
+value2 = number | vertical or horizontal
+     0 = vertical | 1 = horizontal
+       value 1 doesn't matter if 
+        you're doing horizontal

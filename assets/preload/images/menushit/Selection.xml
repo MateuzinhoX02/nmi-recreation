@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="Selection.png">
+<SubTexture name="Selection Sonic10000" x="0" y="0" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Sonic20000" x="165" y="0" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection SonicSpinball0000" x="330" y="0" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Somari0000" x="0" y="202" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0000" x="165" y="202" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0001" x="330" y="202" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0002" x="495" y="0" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0003" x="495" y="202" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0004" x="0" y="404" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0005" x="165" y="404" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0006" x="330" y="404" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0007" x="495" y="404" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0008" x="660" y="0" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0009" x="660" y="202" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0010" x="660" y="404" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0011" x="0" y="606" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Fate0012" x="165" y="606" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+<SubTexture name="Selection Innocence0000" x="330" y="606" width="165" height="202" frameX="-7" frameY="-7" frameWidth="170" frameHeight="200" />
+</TextureAtlas>

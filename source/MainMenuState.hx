@@ -20,6 +20,7 @@ import lime.app.Application;
 import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
+import openfl.Lib;
 
 using StringTools;
 
@@ -31,6 +32,8 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
+	
+
 	
 	var optionShit:Array<String> = [
 		'story_mode',
@@ -49,17 +52,6 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
-		#if MODS_ALLOWED
-		Paths.pushGlobalMods();
-		#end
-		WeekData.loadTheFirstEnabledMod();
-
-		#if desktop
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
-		#end
-		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
-
 		camGame = new FlxCamera();
 		camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;
@@ -73,73 +65,57 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-		bg.scrollFactor.set(0, yScroll);
-		bg.setGraphicSize(Std.int(bg.width * 1.175));
-		bg.updateHitbox();
-		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		add(bg);
+		var bg1:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menu1'));
+		bg1.setGraphicSize(Std.int(FlxG.width, FlxG.height));
+		bg1.updateHitbox();
+		bg1.screenCenter();
+		bg1.antialiasing = ClientPrefs.globalAntialiasing;
+		bg1.visible = true;
+		add(bg1);
+
+		var bg2:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menu2'));
+		bg2.setGraphicSize(Std.int(FlxG.width, FlxG.height));
+		bg2.updateHitbox();
+		bg2.screenCenter();
+		bg2.antialiasing = ClientPrefs.globalAntialiasing;
+		bg2.visible = false;
+		add(bg2);
+
+		var bg3:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menu3'));
+		bg3.setGraphicSize(Std.int(FlxG.width, FlxG.height));
+		bg3.updateHitbox();
+		bg3.screenCenter();
+		bg3.antialiasing = ClientPrefs.globalAntialiasing;
+		bg3.visible = false;
+		add(bg3);
+
+		var bg4:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menu4'));
+		bg4.setGraphicSize(Std.int(FlxG.width, FlxG.height));
+		bg4.updateHitbox();
+		bg4.screenCenter();
+		bg4.antialiasing = ClientPrefs.globalAntialiasing;
+		bg4.visible = false;
+		add(bg4);
+
+		var bg5:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menu4anim'));
+		bg5.setGraphicSize(Std.int(FlxG.width, FlxG.height));
+		bg5.updateHitbox();
+		bg5.screenCenter();
+		bg5.antialiasing = ClientPrefs.globalAntialiasing;
+		bg5.visible = false;
+		add(bg5);
+
+		// Isso é da demo do Haxe K
+		var text = new FlxText(0, 0, 0, "NO ROM FOUND", 64);
+		text.screenCenter();
+		add(text);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollowPos = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 		add(camFollowPos);
-
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
-		magenta.scrollFactor.set(0, yScroll);
-		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
-		magenta.updateHitbox();
-		magenta.screenCenter();
-		magenta.visible = false;
-		magenta.antialiasing = ClientPrefs.globalAntialiasing;
-		magenta.color = 0xFFfd719b;
-		add(magenta);
-		
-		// magenta.scrollFactor.set();
-
-		menuItems = new FlxTypedGroup<FlxSprite>();
-		add(menuItems);
-
-		var scale:Float = 1;
-		/*if(optionShit.length > 6) {
-			scale = 6 / optionShit.length;
-		}*/
-
-		for (i in 0...optionShit.length)
-		{
-			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
-			menuItem.scale.x = scale;
-			menuItem.scale.y = scale;
-			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
-			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
-			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
-			menuItem.animation.play('idle');
-			menuItem.ID = i;
-			menuItem.screenCenter(X);
-			menuItems.add(menuItem);
-			var scr:Float = (optionShit.length - 4) * 0.135;
-			if(optionShit.length < 6) scr = 0;
-			menuItem.scrollFactor.set(0, scr);
-			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
-			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
-			menuItem.updateHitbox();
-		}
-
+	
 		FlxG.camera.follow(camFollowPos, null, 1);
-
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-
-		// NG.core.calls.event.logEvent('swag').send();
 
 		changeItem();
 
@@ -191,6 +167,7 @@ class MainMenuState extends MusicBeatState
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeItem(-1);
+
 			}
 
 			if (controls.UI_DOWN_P)
@@ -208,61 +185,58 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == 'donate')
-				{
-					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
-				}
-				else
-				{
-					selectedSomethin = true;
+				var amongus:String = curSelected;
+				switch (amongus) {
+
+				case '0':
+					//FlxG.log.add('NAO TEM ROM VAGABUNDO');
+					bg1.visible = true;
+					bg2.visible = false;
+					bg3.visible = false;
+					bg4.visible = false;
+					bg5.visible = false;
+					norom.visible = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
-
-					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
-
-					menuItems.forEach(function(spr:FlxSprite)
-					{
-						if (curSelected != spr.ID)
-						{
-							FlxTween.tween(spr, {alpha: 0}, 0.4, {
-								ease: FlxEase.quadOut,
-								onComplete: function(twn:FlxTween)
-								{
-									spr.kill();
-								}
-							});
-						}
-						else
-						{
-							FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
-							{
-								var daChoice:String = optionShit[curSelected];
-
-								switch (daChoice)
-								{
-									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
-									case 'freeplay':
-										MusicBeatState.switchState(new FreeplayState());
-									#if MODS_ALLOWED
-									case 'mods':
-										MusicBeatState.switchState(new ModsMenuState());
-									#end
-									case 'awards':
-										MusicBeatState.switchState(new AchievementsMenuState());
-									case 'credits':
-										MusicBeatState.switchState(new CreditsState());
-									case 'options':
-										LoadingState.loadAndSwitchState(new options.OptionsState());
-								}
-							});
-						}
+					//omega kek
+					new FlxTimer().start(0.5, ()->{
+					 norom.visible = false;
 					});
+				case '1':
+						//FlxG.log.add('NAO TEM ROM VAGABUNDO');
+						bg2.visible = true;
+						bg1.visible = false;
+						bg3.visible = false;
+						bg4.visible = false;
+						bg5.visible = false;
+						norom.visible = true;
+						
+						FlxG.sound.play(Paths.sound('confirmMenu'));
+						//omega kek
+						new FlxTimer().start(0.5, ()->{
+						 norom.visible = false;
+						});
+						case '2':
+							//FlxG.log.add('NAO TEM ROM VAGABUNDO');
+							bg3.visible = true;
+							bg1.visible = false;
+							bg2.visible = false;
+							bg4.visible = false;
+							bg5.visible = false;
+							norom.visible = true;
+							
+							FlxG.sound.play(Paths.sound('confirmMenu'));
+							//omega kek
+							new FlxTimer().start(0.5, ()->{
+							 norom.visible = false;
+							});
+							case '3':
+								
+								PlayState.SONG = Song.loadFromJson('nomoreinnocence-RUN', 'nomoreinnocence');
+								Lib.application.window.alert('M.R INNOCENCE\nGOOD LUCK');
+								new FlxTimer().start(0.5, ()->{
+								LoadingState.loadAndSwitchState(new PlayState());
+								});
 				}
-			}
-			else if (FlxG.keys.anyJustPressed(debugKeys))
-			{
-				selectedSomethin = true;
-				MusicBeatState.switchState(new MasterEditorMenu());
 			}
 		}
 
